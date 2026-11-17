@@ -45,7 +45,7 @@ export default function Curtain() {
               <line x1="30" y1="330" x2="370" y2="330" stroke="rgba(243,231,207,0.35)" strokeWidth="1" />
             </svg>
           </div>
-          <p className="curtain__title deco">The Long Way Round</p>
+          <p className="curtain__title deco">Srismurti Burgul</p>
           <p className="curtain__sub eyebrow">Weaving · Print · Graphic · Innovation</p>
         </motion.div>
       )}

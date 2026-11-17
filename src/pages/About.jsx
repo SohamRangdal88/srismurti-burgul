@@ -57,7 +57,7 @@ export default function About() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.85, ease: EASE, delay: 0.06 }}
         >
-          The Long Way Round
+          Srismurti Burgul
         </motion.h1>
         <motion.p
           className="doc__lede lede"

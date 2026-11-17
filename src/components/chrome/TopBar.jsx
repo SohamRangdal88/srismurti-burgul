@@ -56,7 +56,7 @@ export default function TopBar({ route }) {
         <a className="brand" href="#/" onClick={go('/')}>
           <DecoMark />
           <span className="brand__text">
-            <span className="brand__title deco">The Long Way Round</span>
+            <span className="brand__title deco">Srismurti Burgul</span>
             <span className="brand__sub">An illustrated journey</span>
           </span>
         </a>

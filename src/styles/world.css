@@ -1,0 +1,374 @@
+/* ==========================================================================
+   A world — one direction, hung as an exhibition
+   ========================================================================== */
+
+.world {
+  background: var(--paper);
+  color: var(--ink);
+}
+
+/* ------------------------------------------------------------- masthead */
+
+.world__masthead {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  min-height: min(94svh, 900px);
+  padding: calc(var(--bar-h) + clamp(2rem, 8vh, 5rem)) var(--edge) clamp(2.4rem, 9vh, 6rem);
+  background:
+    radial-gradient(90% 70% at 50% 8%, rgba(255, 255, 255, 0.5), transparent 62%),
+    linear-gradient(180deg, var(--sky-top) 0%, var(--sky-mid) 46%, var(--sky-low) 82%, var(--sky-ground) 100%);
+}
+
+.world__masthead::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: rgba(41, 31, 22, 0.45);
+}
+
+.world__atmos {
+  position: absolute;
+  inset: auto 0 -12% 0;
+  width: 100%;
+  height: 92%;
+  z-index: -1;
+  mix-blend-mode: soft-light;
+  opacity: 0.9;
+}
+
+.world__masthead-inner {
+  position: relative;
+  width: min(100%, 76rem);
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.world__kicker {
+  opacity: 0.9;
+  color: var(--accent);
+}
+
+.world__title {
+  font-size: clamp(2.6rem, 1.4rem + 7.4vw, 7.4rem);
+  letter-spacing: 0.06em;
+  line-height: 0.98;
+  margin: 0;
+  text-shadow: 0 2px 0 rgba(255, 255, 255, 0.35);
+}
+
+.world__entry {
+  font-size: clamp(1.15rem, 0.95rem + 1vw, 1.75rem);
+  font-style: italic;
+  line-height: 1.35;
+  max-width: 30ch;
+  opacity: 0.94;
+}
+
+.world__lede {
+  margin-top: 0.5rem;
+  max-width: 52ch;
+  opacity: 0.82;
+}
+
+.world__atmosphere {
+  margin-top: 0.4rem;
+  max-width: 46ch;
+  opacity: 0.62;
+  text-transform: none;
+  letter-spacing: 0.04em;
+  font-weight: 400;
+}
+
+/* -------------------------------------------------------------- gallery */
+
+.world__gallery {
+  padding: clamp(2.6rem, 9vh, 6rem) var(--edge) clamp(3rem, 10vh, 7rem);
+  background:
+    linear-gradient(180deg, rgba(41, 31, 22, 0.05), transparent 12%),
+    var(--paper);
+}
+
+.world__gallery-head {
+  display: flex;
+  align-items: center;
+  gap: clamp(0.8rem, 2vw, 1.6rem);
+  margin-bottom: clamp(2rem, 6vh, 4rem);
+}
+
+.world__gallery-note {
+  white-space: nowrap;
+}
+
+.wall {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  grid-auto-flow: dense;
+  gap: clamp(1.6rem, 4.5vw, 4.2rem) clamp(1.2rem, 3vw, 3rem);
+  align-items: start;
+}
+
+.wall__item {
+  grid-column: span 6;
+  min-width: 0;
+}
+
+.wall__item--wide,
+.wall__item--landscape {
+  grid-column: span 7;
+}
+
+.wall__item--portrait,
+.wall__item--square {
+  grid-column: span 5;
+}
+
+.wall__item--tall {
+  grid-column: span 4;
+}
+
+.wall__item--feature {
+  grid-column: 1 / -1;
+  margin-bottom: clamp(0.6rem, 3vw, 2rem);
+}
+
+/* A gentle stagger so the wall reads as hung, not laid out. */
+.wall__item:nth-child(even) {
+  margin-top: clamp(0rem, 5vh, 4.5rem);
+}
+
+/* ---------------------------------------------------------------- plate */
+
+.wall__plate {
+  display: flex;
+  flex-direction: column;
+  background: var(--paper);
+  width: 100%;
+}
+
+.wall__plate .plate__media {
+  aspect-ratio: var(--ratio, 1);
+}
+
+.wall__shift {
+  display: block;
+  height: 113%;
+  margin-top: -6.5%;
+}
+
+.wall__label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.28rem;
+  padding: clamp(0.9rem, 1.6vw, 1.35rem) clamp(1rem, 1.8vw, 1.5rem) clamp(1rem, 2vw, 1.5rem);
+  background: var(--paper);
+  border-top: 1px solid rgba(41, 31, 22, 0.42);
+}
+
+.wall__label-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.15rem;
+}
+
+.wall__meta {
+  color: var(--accent);
+  opacity: 1;
+}
+
+.wall__flag {
+  font-size: 0.6rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 600;
+  padding: 0.18rem 0.5rem;
+  border: 1px solid currentColor;
+  color: var(--accent);
+  opacity: 0.85;
+}
+
+.wall__title {
+  font-size: clamp(1.15rem, 0.95rem + 0.9vw, 1.7rem);
+  line-height: 1.15;
+}
+
+.wall__sub {
+  font-size: var(--step--1);
+  opacity: 0.76;
+  line-height: 1.45;
+}
+
+.wall__medium {
+  margin-top: 0.35rem;
+  font-size: var(--step--1);
+  letter-spacing: 0.06em;
+  opacity: 0.5;
+}
+
+.wall__more {
+  margin-top: 0.7rem;
+  font-size: var(--step--1);
+  font-weight: 600;
+  letter-spacing: var(--track-mid);
+  text-transform: uppercase;
+  color: var(--accent);
+  opacity: 0;
+  transform: translateY(5px);
+  transition: opacity 0.5s var(--ease-out), transform 0.55s var(--ease-out);
+}
+
+.wall__plate:hover .wall__more,
+.wall__plate:focus-visible .wall__more {
+  opacity: 1;
+  transform: none;
+}
+
+/* ----------------------------------------------------- the feature plate */
+
+.wall__plate--feature {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+  align-items: stretch;
+}
+
+.wall__plate--feature .plate__media {
+  aspect-ratio: auto;
+  height: clamp(340px, 62vh, 660px);
+}
+
+.wall__plate--feature .wall__label {
+  justify-content: center;
+  padding: clamp(1.6rem, 3.6vw, 3.4rem);
+  border-top: 0;
+  border-left: 1px solid rgba(41, 31, 22, 0.42);
+}
+
+.wall__plate--feature .wall__title {
+  font-size: clamp(1.5rem, 1.1rem + 2vw, 2.9rem);
+}
+
+.wall__plate--feature .wall__sub {
+  font-size: var(--step-0);
+  opacity: 0.82;
+}
+
+.wall__plate--feature .wall__more {
+  opacity: 1;
+  transform: none;
+}
+
+/* ------------------------------------------------------------------ foot */
+
+.world__foot {
+  background: var(--forest-deep);
+  color: var(--cream);
+  padding: clamp(2.6rem, 8vh, 5rem) var(--edge) clamp(3rem, 9vh, 5.5rem);
+}
+
+.world__foot-inner {
+  width: min(100%, 76rem);
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: clamp(2rem, 6vw, 4rem);
+}
+
+.world__cross {
+  flex: 1 1 26rem;
+  max-width: 46rem;
+}
+
+.world__cross > .eyebrow {
+  color: var(--gold);
+  opacity: 0.9;
+  margin-bottom: 0.8rem;
+}
+
+.world__cross ul {
+  border-top: 1px solid rgba(243, 231, 207, 0.18);
+}
+
+.world__cross-link {
+  display: grid;
+  grid-template-columns: 2.4rem 1fr;
+  align-items: baseline;
+  column-gap: 0.9rem;
+  padding: 0.85rem 0.2rem;
+  border-bottom: 1px solid rgba(243, 231, 207, 0.18);
+  transition: padding-left 0.45s var(--ease-out), color 0.35s ease, background 0.45s var(--ease-out);
+}
+
+.world__cross-link:hover,
+.world__cross-link:focus-visible {
+  padding-left: 1rem;
+  background: rgba(243, 231, 207, 0.06);
+  color: var(--accent);
+}
+
+.world__cross-numeral {
+  font-size: var(--step-0);
+  opacity: 0.55;
+}
+
+.world__cross-label {
+  font-size: clamp(1.05rem, 0.85rem + 1.1vw, 1.75rem);
+}
+
+.world__cross-tag {
+  grid-column: 2;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: var(--step--1);
+  opacity: 0.6;
+}
+
+/* ------------------------------------------------------------ responsive */
+
+@media (max-width: 1000px) {
+  .wall__item,
+  .wall__item--wide,
+  .wall__item--landscape,
+  .wall__item--portrait,
+  .wall__item--square,
+  .wall__item--tall {
+    grid-column: span 12;
+  }
+
+  .wall__item:nth-child(even) {
+    margin-top: 0;
+  }
+
+  .wall__plate--feature {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .wall__plate--feature .plate__media {
+    aspect-ratio: var(--ratio, 1);
+    height: auto;
+  }
+
+  .wall__plate--feature .wall__label {
+    border-left: 0;
+    border-top: 1px solid rgba(41, 31, 22, 0.42);
+  }
+}
+
+@media (max-width: 620px) {
+  .world__gallery-head .deco-rule {
+    display: none;
+  }
+
+  .wall__shift {
+    height: 108%;
+    margin-top: -4%;
+  }
+}

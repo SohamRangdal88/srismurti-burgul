@@ -297,10 +297,18 @@ a {
   position: relative;
 }
 
-.plate__media .artwork {
+.plate__media .artwork,
+.plate__media .plate__img {
   width: 100%;
   height: 100%;
+  display: block;
   transition: transform 1.1s var(--ease-deco), filter 0.8s ease;
+}
+
+/* Real project photography: the frame already matches the image's own ratio,
+   so `cover` resolves to no crop at all — it simply fills the plate. */
+.plate__media .plate__img {
+  object-fit: cover;
 }
 
 .plate::after {
@@ -315,8 +323,10 @@ a {
 }
 
 .plate:hover .plate__media .artwork,
-.plate:focus-visible .plate__media .artwork {
-  transform: scale(1.045);
+.plate:focus-visible .plate__media .artwork,
+.plate:hover .plate__media .plate__img,
+.plate:focus-visible .plate__media .plate__img {
+  transform: scale(1.035);
 }
 
 /* --------------------------------------------------------------------- utils */

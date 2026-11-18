@@ -119,28 +119,21 @@
   min-width: 0;
 }
 
-.wall__item--wide,
-.wall__item--landscape {
-  grid-column: span 7;
-}
-
-.wall__item--portrait,
-.wall__item--square {
+/* The wall is hung in a repeating asymmetric rhythm — wide, narrow, wide,
+   narrow — so a category of three or four projects never reads as a grid. */
+.wall__item:nth-child(odd) {
   grid-column: span 5;
 }
 
-.wall__item--tall {
-  grid-column: span 4;
-}
-
-.wall__item--feature {
-  grid-column: 1 / -1;
-  margin-bottom: clamp(0.6rem, 3vw, 2rem);
-}
-
-/* A gentle stagger so the wall reads as hung, not laid out. */
 .wall__item:nth-child(even) {
+  grid-column: span 7;
   margin-top: clamp(0rem, 5vh, 4.5rem);
+}
+
+.wall__item.wall__item--feature {
+  grid-column: 1 / -1;
+  margin-top: 0;
+  margin-bottom: clamp(0.6rem, 3vw, 2rem);
 }
 
 /* ---------------------------------------------------------------- plate */
@@ -154,12 +147,6 @@
 
 .wall__plate .plate__media {
   aspect-ratio: var(--ratio, 1);
-}
-
-.wall__shift {
-  display: block;
-  height: 113%;
-  margin-top: -6.5%;
 }
 
 .wall__label {
@@ -240,8 +227,8 @@
 }
 
 .wall__plate--feature .plate__media {
-  aspect-ratio: auto;
-  height: clamp(340px, 62vh, 660px);
+  aspect-ratio: var(--ratio, 1);
+  height: auto;
 }
 
 .wall__plate--feature .wall__label {
@@ -335,15 +322,9 @@
 
 @media (max-width: 1000px) {
   .wall__item,
-  .wall__item--wide,
-  .wall__item--landscape,
-  .wall__item--portrait,
-  .wall__item--square,
-  .wall__item--tall {
-    grid-column: span 12;
-  }
-
+  .wall__item:nth-child(odd),
   .wall__item:nth-child(even) {
+    grid-column: span 12;
     margin-top: 0;
   }
 
@@ -365,10 +346,5 @@
 @media (max-width: 620px) {
   .world__gallery-head .deco-rule {
     display: none;
-  }
-
-  .wall__shift {
-    height: 108%;
-    margin-top: -4%;
   }
 }

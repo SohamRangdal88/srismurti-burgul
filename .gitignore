@@ -23,3 +23,6 @@ pnpm-debug.log*
 .DS_Store
 Thumbs.db
 *.local
+
+# Raw source-of-truth portfolio images (optimized copies live in src/assets)
+/Portfolio/

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 
 import { CATEGORIES } from '../../data/categories.js'
+import { SITE_ICONS } from '../../data/site.js'
 import { navigate } from '../../lib/router.jsx'
 
 function DecoMark() {
@@ -62,14 +63,17 @@ export default function TopBar({ route }) {
         </a>
 
         <nav className="topbar__nav" aria-label="Primary">
-          <a className="ghost-link" href="#/" onClick={go('/', { landAt: 'signpost' })}>
-            The Signpost
+          <a className="ghost-link topbar__nav-link" href="#/" onClick={go('/', { landAt: 'signpost' })}>
+            <img className="topbar__icon" src={SITE_ICONS.home} alt="" aria-hidden="true" />
+            <span>The Signpost</span>
           </a>
-          <a className="ghost-link" href="#/about" onClick={go('/about')}>
-            About
+          <a className="ghost-link topbar__nav-link" href="#/about" onClick={go('/about')}>
+            <img className="topbar__icon" src={SITE_ICONS.about} alt="" aria-hidden="true" />
+            <span>About</span>
           </a>
-          <a className="ghost-link" href="#/contact" onClick={go('/contact')}>
-            Contact
+          <a className="ghost-link topbar__nav-link" href="#/contact" onClick={go('/contact')}>
+            <img className="topbar__icon" src={SITE_ICONS.contact} alt="" aria-hidden="true" />
+            <span>Contact</span>
           </a>
         </nav>
 
@@ -90,7 +94,10 @@ export default function TopBar({ route }) {
 
       <div className="menu" id="journey-menu" data-open={open} aria-hidden={!open}>
         <div className="menu__inner">
-          <p className="eyebrow menu__kicker">Four directions from one signpost</p>
+          <p className="eyebrow menu__kicker">
+            <img className="topbar__icon menu__kicker-icon" src={SITE_ICONS.work} alt="" aria-hidden="true" />
+            Four directions from one signpost
+          </p>
           <ul className="menu__list">
             {CATEGORIES.map((category) => (
               <li key={category.id}>

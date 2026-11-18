@@ -1,10 +1,8 @@
-import { useRef } from 'react'
-import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion'
+import { motion, useReducedMotion } from 'framer-motion'
 
-import Artwork, { ratioValue } from '../art/Artwork.jsx'
 import { ArcStack, Sunburst } from '../art/primitives.jsx'
 import { CATEGORIES, getCategory } from '../data/categories.js'
-import { PROJECTS_BY_CATEGORY } from '../data/projects.js'
+import { ART_RATIO, PROJECTS_BY_CATEGORY } from '../data/projects.js'
 import { CATEGORY_SKIES } from '../data/palette.js'
 import { navigate } from '../lib/router.jsx'
 import NotFound from './NotFound.jsx'
@@ -12,9 +10,10 @@ import NotFound from './NotFound.jsx'
 /**
  * A world.
  *
- * One of the four directions, hung as an exhibition. Every canvas keeps the
- * ratio its own motif was composed for, so the wall is asymmetric because the
- * work is asymmetric — not because cards were nudged around to look casual.
+ * One of the four directions, hung as an exhibition. The plates show the actual
+ * project images from the portfolio — each frame is built at the true 1024 × 726
+ * ratio of the photography, so nothing is stretched or cropped. The wall is
+ * asymmetric because the layout is composed, not because cards were nudged.
  */
 
 const EASE = [0.16, 0.84, 0.32, 1]
@@ -24,18 +23,16 @@ const go = (path, intent) => (event) => {
   navigate(path, intent)
 }
 
-/** One hung piece: framed artwork, scroll-linked drift, museum label. */
+/** One hung piece: the real project image, framed, with a museum label. */
 function WallItem({ project, large = false, index = 0, reduceMotion }) {
-  const ref = useRef(null)
-  const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] })
-  const drift = useTransform(scrollYProgress, [0, 1], ['-6.5%', '6.5%'])
+  const meta = [project.year, project.role].filter(Boolean).join(' · ')
+  const count = project.images.length
 
   return (
     <motion.li
-      ref={ref}
-      className={`wall__item ${large ? 'wall__item--feature' : `wall__item--${project.ratio}`}`}
-      initial={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 54, rotate: index % 2 ? 1.1 : -1.1 }}
-      whileInView={{ opacity: 1, y: 0, rotate: 0 }}
+      className={`wall__item ${large ? 'wall__item--feature' : ''}`}
+      initial={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 54 }}
+      whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.22 }}
       transition={{ duration: reduceMotion ? 0.3 : 1.05, ease: EASE, delay: (index % 2) * 0.07 }}
     >
@@ -45,30 +42,26 @@ function WallItem({ project, large = false, index = 0, reduceMotion }) {
         onClick={go(`/world/${project.category}/${project.id}`)}
         style={{ '--accent': project.accent }}
       >
-        <span className="plate__media" style={{ '--ratio': ratioValue(project.ratio) }}>
-          <motion.span className="wall__shift" style={{ y: reduceMotion ? 0 : drift }}>
-            <Artwork
-              motif={project.motif}
-              ratio={project.ratio}
-              category={project.category}
-              seed={project.id}
-              title={project.title}
-            />
-          </motion.span>
+        <span className="plate__media" style={{ '--ratio': ART_RATIO }}>
+          <img
+            className="plate__img"
+            src={project.cover}
+            alt={`${project.title} — work from the ${project.title} project`}
+            loading="lazy"
+            decoding="async"
+          />
         </span>
 
         <span className="wall__label">
           <span className="wall__label-top">
-            <span className="eyebrow wall__meta">
-              {project.year} · {project.role}
-            </span>
+            {meta ? <span className="eyebrow wall__meta">{meta}</span> : <span aria-hidden="true" />}
             {project.featured ? <span className="wall__flag">Feature</span> : null}
           </span>
           <span className="wall__title serif">{project.title}</span>
-          <span className="wall__sub">{project.subtitle}</span>
-          <span className="wall__medium">{project.medium}</span>
+          {project.subtitle ? <span className="wall__sub">{project.subtitle}</span> : null}
+          {project.medium ? <span className="wall__medium">{project.medium}</span> : null}
           <span className="wall__more" aria-hidden="true">
-            Read the work →
+            {String(count).padStart(2, '0')} images · Read the work →
           </span>
         </span>
       </a>

@@ -90,6 +90,32 @@ html.cursor-none * {
   box-shadow: 0 10px 26px -18px rgba(41, 31, 22, 0.75);
 }
 
+/* The portfolio's own navigation icons sit inline with the labels. */
+.topbar__nav-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.topbar__icon {
+  display: block;
+  flex: none;
+  height: 1.05rem;
+  width: 1.05rem;
+  object-fit: contain;
+}
+
+.menu__kicker {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.menu__kicker-icon {
+  height: 1.2rem;
+  width: 1.2rem;
+}
+
 /* Menu trigger ------------------------------------------------------------ */
 
 .topbar__menu {
